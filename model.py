@@ -1810,8 +1810,13 @@ def logging_and_validation_loss(params, val_ids, block_size, batch_size, n_eval_
     
     return total_loss / n_eval_batches
 
-# Step 156 - encode_prompt (not yet solved)
-# TODO: implement
+# Step 156 - encode_prompt
+import numpy as np
+
+def encode_prompt(prompt, stoi):
+    """Encode a string prompt to an int ndarray of shape (1, T)."""
+    ids = encode_string(prompt, stoi)
+    return np.array(ids).reshape(1, -1)
 
 # Step 157 - crop_context_to_block_size (not yet solved)
 # TODO: implement
