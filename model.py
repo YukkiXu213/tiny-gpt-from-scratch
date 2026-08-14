@@ -1840,8 +1840,15 @@ def apply_temperature(logits, temperature):
     """Scale logits by 1/temperature before softmax sampling."""
     return logits/temperature
 
-# Step 161 - top_k_filter (not yet solved)
-# TODO: implement
+# Step 161 - top_k_filter
+def top_k_filter(logits, k):
+    """Return logits with all but the top-k entries per row set to -inf."""
+    V = logits.shape[-1]
+    if k >= V:
+        return logits
+    top_k_values = np.sort(logits, axis=-1)[..., -k]
+    mask = logits >= top_k_values[..., np.newaxis]
+    return np.where(mask, logits, -np.inf)
 
 # Step 162 - softmax_to_probs (not yet solved)
 # TODO: implement
