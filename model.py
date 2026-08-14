@@ -1850,8 +1850,10 @@ def top_k_filter(logits, k):
     mask = logits >= top_k_values[..., np.newaxis]
     return np.where(mask, logits, -np.inf)
 
-# Step 162 - softmax_to_probs (not yet solved)
-# TODO: implement
+# Step 162 - softmax_to_probs
+def softmax_to_probs(logits):
+    """Convert (1, V) logits into a row-wise probability distribution."""
+    return stable_softmax_2d_rowwise(logits)
 
 # Step 163 - sample_one_token (not yet solved)
 # TODO: implement
